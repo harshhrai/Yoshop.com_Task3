@@ -1,0 +1,72 @@
+## The Fake Buyer Identification System is designed to detect suspicious or fraudulent transactions from a given dataset (Yoshops.com Sale Order file).
+## The system conducts Exploratory Data Analysis (EDA) based on several conditions that are commonly associated with fraudulent activities.
+## It then generates both CSV files for further analysis and a PDF report summarizing the key findings.
+
+This project automates the detection process by analyzing patterns and behaviors that might indicate fraudulent activity, 
+such as discrepancies in shipping and billing addresses, unusually large orders, and multiple orders using different payment methods.
+
+Features
+Shipping address differs from the billing address:
+- Identifies orders where the shipping and billing addresses do not match.
+- Output: Shipping_Differs_from_Billing.csv.
+Multiple orders of the same item:
+- Detects repeated purchases of the same item within the same order.
+- Output: Multiple_Orders_of_Same_Item.csv.
+Unusually large orders:
+- Finds orders where the quantity exceeds a set threshold (top 5%).
+-Output: Unusually_Large_Orders.csv.
+Multiple orders to the same address with different payment methods:
+- Identifies cases where multiple orders are shipped to the same address but use different payment methods.
+- Output: Multiple_Payment_Methods_at_Same_Address.csv.
+Unexpected international orders:
+- Flags orders where the shipping address is outside the expected country (India).
+- Output: Unexpected_International_Orders.csv.
+PDF Report:
+- Summarizes all the findings from the EDA in a single PDF report.
+- Output: Fake_Buyer_Identification_EDA_Report.pdf.
+  
+Dataset
+The dataset used in this project is the Yoshops.com Sale Order file containing order details 
+such as billing and shipping addresses, order quantities, payment methods, and more.
+
+Ensure the dataset is formatted correctly and placed in the appropriate directory.
+Columns Required:
+- Billing Street Address
+- Shipping Street Address
+- LineItem Qty
+- Total
+- Payment Method
+- Shipping Country
+- Order
+
+Prerequisites
+- Python 3.x
+- Pandas: For data processing.
+- FPDF: For generating the PDF report.
+- Matplotlib / Seaborn: (Optional, if any graphs are needed).
+
+How It Works
+1. The script loads the dataset and preprocesses relevant columns (e.g., filling missing values, converting data types).
+2. For each condition (e.g., mismatched addresses, unusually large orders), it filters the dataset and exports the results to CSV files.
+3. A PDF report summarizing the results of the analysis is generated, containing a list of all identified suspicious patterns.
+4. The CSV files and the PDF report can be used for further investigation or visualization.
+Output
+
+The following files will be generated after running the script:
+1. Shipping_Differs_from_Billing.csv: Contains orders where shipping and billing addresses do not match.
+2. Multiple_Orders_of_Same_Item.csv: Contains orders with multiple instances of the same item.
+3. Unusually_Large_Orders.csv: Contains orders that exceed the top 5% in quantity.
+4. Multiple_Payment_Methods_at_Same_Address.csv: Contains addresses with multiple orders using different payment methods.
+5. Unexpected_International_Orders.csv: Contains orders where the shipping address is outside of India.
+6. Fake_Buyer_Identification_EDA_Report.pdf: A PDF summary report of all the findings.
+   
+Example
+Here's a sample output for "Shipping address differs from billing address":
+Order # | Billing Address           | Shipping Address
+--------------------------------------------------------
+1001    | 123 Main St, Delhi         | 789 Elm St, Mumbai
+1005    | 456 Oak St, Chennai        | 456 Oak St, Unknown
+
+Conclusion
+This project provides a systematic way to detect potentially fraudulent transactions by analyzing specific data patterns. 
+The output CSV files and PDF reports can assist in identifying high-risk transactions and improving the security of the sales order system.
